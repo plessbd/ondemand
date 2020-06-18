@@ -45,9 +45,8 @@ RUN mkdir -p /etc/ood/config
 RUN cp /opt/ood/nginx_stage/share/nginx_stage_example.yml            /etc/ood/config/nginx_stage.yml
 RUN cp /opt/ood/ood-portal-generator/share/ood_portal_example.yml    /etc/ood/config/ood_portal.yml
 RUN sed -i -r \
-  -e 's/^#listen_addr_port:.*/listen_addr_port: 8080/g' \
-  -e 's/^#port:.*/port: 8080/g' \
   -e 's/^#servername:.*/servername: localhost/g' \
+  -e 's/^#use_rewrites: true/use_rewrites: false/g' \
   /etc/ood/config/ood_portal.yml
 
 # make some misc directories & files
@@ -65,6 +64,7 @@ RUN /opt/ood/nginx_stage/sbin/update_nginx_stage
 RUN sed -i 's#HTTPD24_HTTPD_SCLS_ENABLED=.*#HTTPD24_HTTPD_SCLS_ENABLED="httpd24 ondemand"#g'  /opt/rh/httpd24/service-environment
 RUN groupadd ood
 RUN useradd --create-home --gid ood ood
+RUN /opt/rh/httpd24/root/bin/htpasswd -b -c /opt/rh/httpd24/root/etc/httpd/.htpasswd ood ood
 
 EXPOSE 80
 CMD [ "/opt/rh/httpd24/root/usr/sbin/httpd-scl-wrapper", "-DFOREGROUND" ]
