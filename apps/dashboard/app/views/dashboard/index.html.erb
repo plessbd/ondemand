@@ -1,22 +1,88 @@
 <%= render partial: 'shared/welcome' %>
 
 
-<% if Configuration.xdmod_integration_enabled? %>
   <%# This assumes @motd_file responds to `to_partial_path` %>
   <%# render @motd if @motd %>
   <div class="row">
-    <div class="col-md-8">
-      <div class="xdmod">
-        <%= render "xdmod_widget_jobs" %>
-        <%= render "xdmod_widget_perf" %>
-        <%= render "xdmod_widget_summarycharts" %>
-      </div>
-    </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
       <%# This assumes @motd_file responds to `to_partial_path` %>
       <%= render @motd if @motd %>
     </div>
+    <div class="col-md-6">
+      <table class="table table-condensed small">
+        <thead>
+          <th>Cluster</th>
+          <th>Nodes</th>
+          <th>Cores</th>
+          <th>GPUs</th>
+          <th>Running Jobs</th>
+          <th>Queued Jobs</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Owens</td>
+            <td>152 Free (659/811 Active)</td>
+            <td>7748 Free (15252/23000 Active)</td>
+            <td>3 Free (154/157 Active)</td>
+            <td>966</td>
+            <td>359 (235 req. GPU)</td>
+          </tr>
+          <tr>
+            <td>Pitzer</td>
+            <td>46 Free (215/261 Active)</td>
+            <td>3063 Free (7577/10640 Active)</td>
+            <td>1 Free (31/32 Active)</td>
+            <td>326</td>
+            <td>76 (67 req. GPU)</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <table class="table table-condensed small">
+        <caption>Free Resources:</caption>
+        <thead>
+          <th>Cluster</th>
+          <th>Nodes</th>
+          <th>Cores</th>
+          <th>GPUs</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Owens</td>
+            <td>152</td>
+            <td>7748</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>Pitzer</td>
+            <td>46</td>
+            <td>3063</td>
+            <td>1</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <%= image_tag '/jobs.png' %>
+      <div class="pull-right small">1-6 <span class="caret"></span> of 463 <a href="#"><<</a> <input value="1" style="width: 30px"> <a href="#">>></a></div>
+      <%= image_tag '/jobs.png' %>
+      <div class="pull-right small">1-6 <span class="caret"></span> of 463 <a href="#"><<</a> <input value="1" style="width: 30px"> <a href="#">>></a></div>
+      <%= image_tag '/jobs.png' %>
+      <div class="pull-right small">1-6 <span class="caret"></span> of 463 <a href="#"><<</a> <input value="1" style="width: 30px"> <a href="#">>></a></div>
+    </div>
   </div>
-<% else %>
-  <%= render @motd if @motd %>
-<% end %>
+
+Nodes free
+Pitz |
+
+Procs free
+
+GPUs free
+
+Running & queued
+
+
+
+Could use datatables for both
+but with a custom
