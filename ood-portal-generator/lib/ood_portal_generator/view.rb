@@ -30,7 +30,7 @@ module OodPortalGenerator
 
       # Maintenance configuration
       @use_maintenance          = opts.fetch(:use_maintenance, true)
-      @maintenance_ip_whitelist = Array(opts.fetch(:maintenance_ip_whitelist, []))
+      @maintenance_ip_allowlist = Array(opts.fetch(:maintenance_ip_allowlist || :maintenance_ip_whitelist, []))
 
       # Portal authentication
       @auth = opts.fetch(:auth, [
